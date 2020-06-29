@@ -120,36 +120,6 @@
       </ul>
     </li>
 
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-folder-o"></i>
-        <span class="treeview-title">기타</span>
-        <span class="pull-right-container pull-right">
-          <i class="fa fa-angle-left fa-fw"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <router-link tag="li" 
-                     class="pageLink" 
-                     to="/mPlatform/1.0/tables" 
-                     v-if="user.level == 1">
-          <a>
-            <i class="fa fa-circle-o"></i>
-            <span class="page">테이블</span>
-          </a>
-        </router-link>
-        <router-link tag="li" 
-                     class="pageLink" 
-                     to="/mPlatform/1.0/tasks" 
-                     v-if="user.level == 1">
-          <a>
-            <i class="fa fa-circle-o"></i>
-            <span class="page">기타</span>
-          </a>
-        </router-link>
-      </ul>
-    </li>
-
     <li class="header">래퍼런스</li>
     <router-link tag="li" 
                  class="pageLink" 
