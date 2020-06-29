@@ -6,20 +6,27 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import { sync } from 'vuex-router-sync'
-import routes from './routes'
 import store from './store'
+import axios from 'axios'
+
+import routes from './index.routes'
+
+Vue.config.productionTip = false
+Vue.prototype.$http = axios
+Vue.prototype.$host = 'http://127.0.0.1:8080'
+Vue.prototype.$rootpath = '/mPlatform/1.0'
 
 // Import Helpers for filters
-import { domain, count, prettyDate, pluralize } from './filters'
+// import { domain, count, prettyDate, pluralize } from './filters'
 
 // Import Views - Top level
 import AppView from './components/App.vue'
 
 // Import Install and register helper items
-Vue.filter('count', count)
-Vue.filter('domain', domain)
-Vue.filter('prettyDate', prettyDate)
-Vue.filter('pluralize', pluralize)
+// Vue.filter('count', count)
+// Vue.filter('domain', domain)
+// Vue.filter('prettyDate', prettyDate)
+// Vue.filter('pluralize', pluralize)
 
 Vue.use(VueRouter)
 
@@ -43,7 +50,7 @@ router.beforeEach((to, from, next) => {
     // if not, redirect to login page.
     window.console.log('Not authenticated')
     next({
-      path: '/login',
+      path: '/mPlatform/1.0/login',
       query: { redirect: to.fullPath }
     })
   } else {
@@ -67,7 +74,7 @@ if (window.localStorage) {
 // Start out app!
 // eslint-disable-next-line no-new
 new Vue({
-  el: '#root',
+  el: '#app',
   router: router,
   store: store,
   render: h => h(AppView)

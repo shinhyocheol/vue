@@ -26,15 +26,13 @@
 
       <router-view></router-view>
     </div>
-    <!-- /.content-wrapper -->
-  
-    <!-- Horizontal bar at bottom. Contains copy right -->
+    
     <dash-footer></dash-footer>
   </div>
 </template>
 
 <script>
-import faker from 'faker'
+// import faker from 'faker'
 import config from '../config'
 import DashFooter from './layout/DashFooter'
 import DashHeader from './layout/DashHeader'
@@ -50,19 +48,23 @@ export default {
   },
   data: function () {
     return {
-      // section: 'Dash',
+      section: 'Dash',
       classes: {
         fixed_layout: config.fixedLayout,
         hide_logo: config.hideLogoOnMobile
-      }
+      },
+      id: localStorage.getItem("ACCESS_USER"),
+      token: localStorage.getItem("ACCESS_TOKEN"),
+      level: localStorage.getItem("ACCESS_LEVEL")
     }
   },
   computed: {
     user () {
       return {
-        displayName: faker.name.findName(),
-        avatar: faker.image.avatar(),
-        roles: [faker.name.jobTitle(), faker.name.jobTitle()]
+        displayName: this.id,
+        avatar: "/static/img/logo_exs.png",
+        roles: this.token,
+        level: this.level
       }
     }
   }
@@ -86,11 +88,6 @@ export default {
   .wrapper.hide_logo .main-header .logo {
     display: none;
   }
-}
-
-.logo-mini,
-.logo-lg {
-  text-align: left;
 }
 .logo-mini img,
 .logo-lg img {

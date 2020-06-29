@@ -197,7 +197,6 @@
 
 <script>
 import $ from 'jquery'
-// Require needed datatables modules
 require('datatables.net')
 require('datatables.net-bs')
 

@@ -1,102 +1,174 @@
 <template>
   <ul class="sidebar-menu">
-    <li class="header">TOOLS</li>
-    <router-link tag="li" class="pageLink" to="/">
-      <a>
-        <i class="fa fa-desktop"></i>
-        <span class="page">Dashboard</span>
-      </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/tables">
-      <a>
-        <i class="fa fa-table"></i>
-        <span class="page">Tables</span>
-      </a>
-    </router-link>
-
-    <li class="header">ME</li>
-    <router-link tag="li" class="pageLink" to="/tasks">
-      <a>
-        <i class="fa fa-tasks"></i>
-        <span class="page">Tasks</span>
-      </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/setting">
-      <a>
-        <i class="fa fa-cog"></i>
-        <span class="page">Settings</span>
-      </a>
-    </router-link>
+    <li class="header">메뉴</li>
     <li class="treeview">
       <a href="#">
-        <i class="fa fa-folder-o"></i>
-        <span class="treeview-title">Files</span>
+        <i class="fa fa-table"></i>
+        <span class="treeview-title">지역</span>
         <span class="pull-right-container pull-right">
           <i class="fa fa-angle-left fa-fw"></i>
         </span>
       </a>
       <ul class="treeview-menu">
-        <li>
-          <a href="#">
-            <i class="fa fa-file-word-o"></i> Item 1
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/regions" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">데이터 조회</span>
           </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-file-picture-o"></i> Item 2
+        </router-link>
+      </ul>
+    </li>
+    <li class="treeview">
+      <a href="#">
+        <i class="fa fa-table"></i>
+        <span class="treeview-title">제조사 및 모델</span>
+        <span class="pull-right-container pull-right">
+          <i class="fa fa-angle-left fa-fw"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/regions" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">제조사</span>
           </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-file-pdf-o"></i> Item 3
+        </router-link>
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/regions" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">시리즈</span>
           </a>
-        </li>
+        </router-link>
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/regions" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">모델</span>
+          </a>
+        </router-link>
       </ul>
     </li>
 
-    <li class="header">LOGS</li>
-    <router-link tag="li" class="pageLink" to="/access">
-      <a>
-        <i class="fa fa-book"></i>
-        <span class="page">Access</span>
+    <li class="treeview">
+      <a href="#">
+        <i class="fa fa-table"></i>
+        <span class="treeview-title">통신사 및 요금제</span>
+        <span class="pull-right-container pull-right">
+          <i class="fa fa-angle-left fa-fw"></i>
+        </span>
       </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/server">
-      <a>
-        <i class="fa fa-hdd-o"></i>
-        <span class="page">Server</span>
-      </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/repos">
-      <a>
-        <i class="fa fa-heart"></i>
-        <span class="page">Repos</span>
-        <small class="label pull-right bg-green">AJAX</small>
-      </a>
-    </router-link>
+      <ul class="treeview-menu">
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/carriers" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">통신사</span>
+          </a>
+        </router-link>
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/planCategories" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">카테고리</span>
+          </a>
+        </router-link>
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/plans" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">요금제</span>
+          </a>
+        </router-link>
+      </ul>
+    </li>
 
-    <li class="header">PAGES</li>
-    <router-link tag="li" class="pageLink" to="/login">
-      <a>
-        <i class="fa fa-circle-o text-yellow"></i>
-        <span class="page"> Login</span>
+    <li class="treeview">
+      <a href="#">
+        <i class="fa fa-dashboard"></i>
+        <span class="treeview-title">대시보드</span>
+        <span class="pull-right-container pull-right">
+          <i class="fa fa-angle-left fa-fw"></i>
+        </span>
       </a>
-    </router-link>
-    <router-link tag="li" class="pageLink" to="/404">
+      <ul class="treeview-menu">
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/dashboard" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">대시보드</span>
+          </a>
+        </router-link>
+      </ul>
+    </li>
+
+    <li class="treeview">
+      <a href="#">
+        <i class="fa fa-folder-o"></i>
+        <span class="treeview-title">기타</span>
+        <span class="pull-right-container pull-right">
+          <i class="fa fa-angle-left fa-fw"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/tables" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">테이블</span>
+          </a>
+        </router-link>
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/tasks" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">기타</span>
+          </a>
+        </router-link>
+      </ul>
+    </li>
+
+    <li class="header">래퍼런스</li>
+    <router-link tag="li" 
+                 class="pageLink" 
+                 to="/404" 
+                 v-if="user.level == 1">
       <a>
         <i class="fa fa-circle-o text-red"></i>
-        <span class="page"> 404</span>
+        <span class="page">404</span>
       </a>
     </router-link>
   </ul>
 </template>
 <script>
 export default {
-  name: 'SidebarMenu'
+  name: "SidebarMenu",
+  props: ["user"]
 }
 </script>
 <style>
-/* override default */
 .sidebar-menu > li > a {
   padding: 12px 15px 12px 15px;
 }

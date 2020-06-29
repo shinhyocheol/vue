@@ -21,7 +21,10 @@ module.exports = {
     'generator-star-spacing': 0,
     // disable space before func paren
     'space-before-function-paren': 0,
+
+    'quotes': ['off', 'single'],
+    
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
   }
 }

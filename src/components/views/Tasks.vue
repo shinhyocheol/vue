@@ -8,7 +8,7 @@
           <span class="bg-green">{{today}}</span>
         </li>
         <!-- timeline item -->
-        <li v-for="line in timeline">
+        <li v-for="line in timeline" v-bind:key="line">
           <!-- timeline icon -->
           <i v-bind:class="'fa ' + line.icon + ' bg-' + line.color"></i>
           <div class="timeline-item">
@@ -17,7 +17,7 @@
             <div class="timeline-body" v-if="line.body" v-html="line.body">
             </div>
             <div class="timeline-footer" v-if="line.buttons">
-              <a v-for="btn in line.buttons" v-bind:class="'btn btn-' + btn.type + ' btn-xs'" v-bind:href="btn.href" v-bind:target="btn.target">{{btn.message}}</a>
+              <a v-for="btn in line.buttons" v-bind:key="btn" v-bind:class="'btn btn-' + btn.type + ' btn-xs'" v-bind:href="btn.href" v-bind:target="btn.target">{{btn.message}}</a>
             </div>
           </div>
         </li>

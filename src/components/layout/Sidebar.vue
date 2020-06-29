@@ -1,10 +1,6 @@
 <template>
   <aside class="main-sidebar">
-
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-
-      <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
           <img :src="user.avatar" />
@@ -18,8 +14,6 @@
           </a>
         </div>
       </div>
-
-      <!-- search form (Optional) -->
       <form v-on:submit.prevent class="sidebar-form" id="searchForm">
         <div class="input-group" id="searchContainer">
           <span class="input-group-btn">
@@ -36,13 +30,8 @@
           </span>
         </div>
       </form>
-      <!-- /.search form -->
-
-      <!-- Sidebar Menu -->
-      <sidebar-menu />
-      <!-- /.sidebar-menu -->
+      <sidebar-menu :user="user" />
     </section>
-    <!-- /.sidebar -->
   </aside>
 </template>
 <script>
