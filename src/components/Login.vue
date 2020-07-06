@@ -31,23 +31,21 @@
           style="margin-top:30px;"
         />
       </form>
-
       <div id="formFooter">
         <a class="underlineHover" href="#">Forget Password?</a>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: "Login",
   data: () => ({
     section: "Login",
     loading: "",
-    userid: "",
-    password: "",
-    response: ""
+    response: "",
+    userid: null,
+    password: null
   }),
   methods: {
     handleLogin() {
@@ -110,8 +108,7 @@ export default {
   }
 }
 </script>
-
-<style>
+<style scope>
 .login-wrapper a {
   color: #92badd;
   display: inline-block;
