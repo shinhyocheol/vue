@@ -2,7 +2,7 @@
   <div class="login-wrapper">
     <div id="formContent" style="margin-top:100px;">
       <div class="first">
-        <h2>Mobile Platform.ver1</h2>
+        <h2>Platform Login</h2>
       </div>
       <form>
         <input
