@@ -7,7 +7,7 @@ const regionRoutes = [
     path: 'regions',
     component: RegionListView,
     name: '지역',
-    meta: {description: '데이터 조회'}
+    meta: {description: '지역데이터 목록을 조회하실 수 있습니다.'}
   }, {
     path: 'regions/inputs',
     component: RegionInputView,

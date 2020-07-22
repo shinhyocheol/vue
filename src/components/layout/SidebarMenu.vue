@@ -3,104 +3,6 @@
     <li class="header">메뉴</li>
     <li class="treeview">
       <a href="#">
-        <i class="fa fa-table"></i>
-        <span class="treeview-title">지역</span>
-        <span class="pull-right-container pull-right">
-          <i class="fa fa-angle-left fa-fw"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <router-link tag="li" 
-                     class="pageLink" 
-                     to="/mPlatform/1.0/regions" 
-                     v-if="user.level == 1">
-          <a>
-            <i class="fa fa-circle-o"></i>
-            <span class="page">데이터 조회</span>
-          </a>
-        </router-link>
-      </ul>
-    </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-table"></i>
-        <span class="treeview-title">제조사 및 모델</span>
-        <span class="pull-right-container pull-right">
-          <i class="fa fa-angle-left fa-fw"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <router-link tag="li" 
-                     class="pageLink" 
-                     to="/mPlatform/1.0/regions" 
-                     v-if="user.level == 1">
-          <a>
-            <i class="fa fa-circle-o"></i>
-            <span class="page">제조사</span>
-          </a>
-        </router-link>
-        <router-link tag="li" 
-                     class="pageLink" 
-                     to="/mPlatform/1.0/regions" 
-                     v-if="user.level == 1">
-          <a>
-            <i class="fa fa-circle-o"></i>
-            <span class="page">시리즈</span>
-          </a>
-        </router-link>
-        <router-link tag="li" 
-                     class="pageLink" 
-                     to="/mPlatform/1.0/regions" 
-                     v-if="user.level == 1">
-          <a>
-            <i class="fa fa-circle-o"></i>
-            <span class="page">모델</span>
-          </a>
-        </router-link>
-      </ul>
-    </li>
-
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-table"></i>
-        <span class="treeview-title">통신사 및 요금제</span>
-        <span class="pull-right-container pull-right">
-          <i class="fa fa-angle-left fa-fw"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <router-link tag="li" 
-                     class="pageLink" 
-                     to="/mPlatform/1.0/carriers" 
-                     v-if="user.level == 1">
-          <a>
-            <i class="fa fa-circle-o"></i>
-            <span class="page">통신사</span>
-          </a>
-        </router-link>
-        <router-link tag="li" 
-                     class="pageLink" 
-                     to="/mPlatform/1.0/planCategories" 
-                     v-if="user.level == 1">
-          <a>
-            <i class="fa fa-circle-o"></i>
-            <span class="page">카테고리</span>
-          </a>
-        </router-link>
-        <router-link tag="li" 
-                     class="pageLink" 
-                     to="/mPlatform/1.0/plans" 
-                     v-if="user.level == 1">
-          <a>
-            <i class="fa fa-circle-o"></i>
-            <span class="page">요금제</span>
-          </a>
-        </router-link>
-      </ul>
-    </li>
-
-    <li class="treeview">
-      <a href="#">
         <i class="fa fa-dashboard"></i>
         <span class="treeview-title">대시보드</span>
         <span class="pull-right-container pull-right">
@@ -119,7 +21,26 @@
         </router-link>
       </ul>
     </li>
-
+    <li class="treeview">
+      <a href="#">
+        <i class="fa fa-table"></i>
+        <span class="treeview-title">지역</span>
+        <span class="pull-right-container pull-right">
+          <i class="fa fa-angle-left fa-fw"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <router-link tag="li" 
+                     class="pageLink" 
+                     to="/mPlatform/1.0/regions" 
+                     v-if="user.level == 1">
+          <a>
+            <i class="fa fa-circle-o"></i>
+            <span class="page">데이터 조회</span>
+          </a>
+        </router-link>
+      </ul>
+    </li>
     <li class="header">래퍼런스</li>
     <router-link tag="li" 
                  class="pageLink" 
