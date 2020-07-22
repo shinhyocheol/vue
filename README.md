@@ -1,3 +1,3 @@
 
-20200629 Vue 관리자 웹
+2020-06-29 Vue Front web
 (템플릿 출처 : https://github.com/ColorlibHQ/AdminLTE)
