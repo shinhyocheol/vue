@@ -8,12 +8,12 @@ import DashboardView from './components/views/Dashboard.vue'
 
 const routes = [
   {
-    path: '/mPlatform/1.0/login',
+    path: '/login',
     component: LoginView
   },
   {
-    redirect: '/mPlatform/1.0/login',
-    path: '/mPlatform/1.0/',
+    redirect: '/login',
+    path: '/',
     component: DashView,
     children: [
       {

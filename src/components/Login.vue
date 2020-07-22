@@ -31,48 +31,32 @@
           style="margin-top:30px;"
         />
       </form>
+
       <div id="formFooter">
         <a class="underlineHover" href="#">Forget Password?</a>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: "Login",
   data: () => ({
     section: "Login",
     loading: "",
-    response: "",
-    userid: null,
-    password: null
+    userid: "",
+    password: "",
+    response: ""
   }),
   methods: {
     handleLogin() {
       if (this.userid && this.password) {
-        var params = new URLSearchParams()
-        params.append("id", this.userid)
-        params.append("password", this.password)
-        this.$http
-          .post(this.$host + this.$rootpath + "/signin", params)
-          .then(result => {
-            var data = result.data
-            if (data.isPassword) {
-              var token = data["x-access-token"]
-              var level = data["authority_level"]
-              this.$store.commit("SET_USER", data.admin_id)
-              this.$store.commit("SET_TOKEN", token)
-              this.$store.commit("SET_LEVEL", level)
-              if (window.localStorage) {
-                localStorage.setItem("ACCESS_USER", data.admin_id)
-                localStorage.setItem("ACCESS_TOKEN", token)
-                localStorage.setItem("ACCESS_LEVEL", level)
-              }
-              this.$router.push(this.$rootpath + "/regions")
-            } else {
-              alert("비밀번호가 일치하지 않습니다. 확인 후 다시 시도해주시기 바랍니다.")
-              return false
-            }
+        const id = this.userid
+        const password = this.password
+        this.$store.dispatch('LOGIN', {id, password})
+          .then(() => {
+            this.$router.push(this.$rootpath + "/dashboard")
           }).catch(e => {
             console.log(e)
             switch (e.response.status) {
@@ -80,10 +64,10 @@ export default {
                 alert("접근 권한이 없습니다.")
                 return false
               case 403:
-                alert("접근 권한이 없습니다.")
+                alert("접근권한이 없거나 비밀번호가 올바르지 않습니다.")
                 return false
               case 404:
-                alert("존재하지 않는 페이지입니다.")
+                alert("존재하지 않는 주소입니다.")
                 return false
               case 500:
                 alert("서버측에 문제가 발생했습니다. \n관리자에게 문의바랍니다.")
@@ -108,7 +92,8 @@ export default {
   }
 }
 </script>
-<style scope>
+
+<style>
 .login-wrapper a {
   color: #92badd;
   display: inline-block;

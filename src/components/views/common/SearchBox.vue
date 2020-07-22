@@ -1,18 +1,32 @@
 <template>
   <div class="center-block custom-table" id="search-box">
     <div class="table-scrollable">
-      <table class="table" style="text-align:center; vertical-align: middle; margin-bottom:0px;">
+      <table class="table custom-style">
         <tbody>
           <slot class="filter" name="filter" />
         </tbody>
       </table>
+    </div>
+    <div class="button-el">
+      <button class="btn btn-warning" 
+              type="button" 
+              style="float:right"
+              @click="search()">
+        <i class="fa fa-search"></i>
+        <span>search</span>
+      </button>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "SearchBox",
-  props: ['item']
+  props: ['item', 'searchFilter'],
+  methods: {
+    search() {
+      this.searchFilter()
+    }
+  }
 }
 </script>
 <style scoped>
@@ -20,7 +34,12 @@ export default {
   background: #fff;
   border: #cdcdcd 1px solid;
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+}
+.custom-style{
+  text-align:center; 
+  vertical-align: middle; 
+  margin-bottom:0px;
 }
 
 .heading {
@@ -134,6 +153,11 @@ export default {
 .paging-nav{
   width: 100%;
   height: auto;
+}
+.button-el{
+  height:40px; 
+  clear:both; 
+  margin-bottom:15px;
 }
 </style>
 

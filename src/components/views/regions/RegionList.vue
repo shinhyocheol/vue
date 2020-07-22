@@ -1,16 +1,18 @@
 <template>
   <section class="content">
     <form id="searchForm">
-      <search-box>
+      <search-box :search-filter="searchFilter">
         <template slot="filter">
           <tr>
             <th>시(도)</th>
             <td>
-              <input type="text"
-                    class="form-control form-filter input-sm searchable"
-                    name="sido"
-                    v-model="sido"
-                    />
+              <select class="form-control" 
+                      name="sido"
+                      v-model="sido" >
+                <option value>구분타입</option>
+                <option value="">One</option>
+                <option value="">Two</option>
+              </select>
             </td>
             <th>구(군)</th>
             <td>
@@ -80,15 +82,6 @@
                 <option value="Y">Y</option>
                 <option value="N">N</option>
               </select>
-            </td>
-
-            <th>검색</th>
-            <td>
-              <button class="btn btn-sm btn-warning" 
-                      type="button" 
-                      @click="searchFilter()">
-                <i class="fa fa-search"></i>
-              </button>
             </td>
           </tr>
         </template>
@@ -187,9 +180,9 @@ export default {
   methods: {
     handleAuth() {
       var token = localStorage.getItem("ACCESS_TOKEN")
-      if (token === null || token === "") {
+      if (!token) {
         alert("접근할 수 있는 인증토큰이 유효하지 않습니다. \n다시 로그인 해주시기바랍니다.")
-        this.$router.push(this.$rootpath + "/login")
+        this.$store.dispatch('LOGOUT').then(() => this.$router.push(this.$rootpath + "/login"))
       } else {
         var params = new URLSearchParams()
         params.append("pageNum", 0)
@@ -197,8 +190,7 @@ export default {
       }
     },
     getRegions(params = null) {
-      var token = localStorage.getItem("ACCESS_TOKEN")
-      this.$http.defaults.headers.common['x-access-token'] = token
+      this.$http.defaults.headers.common['x-access-token'] = localStorage.getItem("ACCESS_TOKEN")
       this.$http.get(this.$host + this.$rootpath + "/regions?" + params)
       .then(result => {
         this.dataMap = result.data.data.region_list
@@ -210,12 +202,12 @@ export default {
             this.$router.push(this.$rootpath + "/login")
             return false
           case 403:
-            alert("인증에 문제가 발생했습니다.")
+            alert("접근 권한이 없습니다.")
             console.log(e)
             this.$router.push(this.$rootpath + "/login")
             return false
           case 404:
-            alert("존재하지 않는 페이지입니다.")
+            alert("존재하지 않는 주소입니다.")
             console.log(e)
             this.$router.push(this.$rootpath + "/login")
             return false
@@ -261,7 +253,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .btn:first-child {
   margin-right: 5px;
 }

@@ -1,5 +1,5 @@
 export default {
-  serverURI: '/mPlatform/1.0',
+  serverURI: '',
   fixedLayout: false,
   hideLogoOnMobile: false
 }
