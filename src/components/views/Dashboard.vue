@@ -1,56 +1,42 @@
 <template>
   <!-- Main content -->
   <section class="content">
-    <!-- GitHub hint -->
     <div class="row">
       <div class="col-xs-12">
         <alert :dismissible="true"
                type="success"
                :iconClasses="['fa', 'fa-check']"
-               title="CoPilot is open source!">
-          <span>Click on icon to check it out on github.</span>
-          <a href="https://github.com/misterGF/CoPilot" target="_blank">
-            <i class="fa fa-github fa-2x"></i>
-          </a>
+               title="Pick Phone Admin Service">
+          <span></span>
         </alert>
       </div>
-
-      <!-- Info boxes -->
       <div class="col-md-3 col-sm-6 col-xs-12">
         <info-box color-class="bg-aqua"
                   :icon-classes="['ion', 'ion-ios-gear-outline']"
                   text="CPU Traffic"
                   number="90%"></info-box>
       </div>
-      <!-- /.col -->
       <div class="col-md-3 col-sm-6 col-xs-12">
         <info-box color-class="bg-red"
                   :icon-classes="['fa', 'fa-google-plus']"
                   text="Likes"
                   number="41,410"></info-box>
       </div>
-      <!-- /.col -->
-
-      <!-- fix for small devices only -->
       <div class="clearfix visible-sm-block"></div>
-      
       <div class="col-md-3 col-sm-6 col-xs-12">
         <info-box color-class="bg-green"
                   :icon-classes="['ion', 'ion-ios-cart-outline']"
                   text="Sales"
                   number="760"></info-box>
       </div>
-      <!-- /.col -->
       <div class="col-md-3 col-sm-6 col-xs-12">
         <info-box color-class="bg-yellow"
                   :icon-classes="['ion', 'ion-ios-people-outline']"
-                  text="New Members"
+                  text="Members"
                   number="2,000"></info-box>
       </div>
-      <!-- /.col -->
     </div>
-    <!-- /.row -->
-
+    
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header with-border">
@@ -58,27 +44,26 @@
           <div class="box-body">
             <div class="col-sm-6 col-xs-12">
               <p class="text-center">
-                <strong>Web Traffic Overview</strong>
+                <strong>접속 트래픽 통계 분석</strong>
               </p>
               <canvas id="trafficBar" ></canvas>
             </div>
             <hr class="visible-xs-block">
             <div class="col-sm-6 col-xs-12">
               <p class="text-center">
-                <strong>Language Overview</strong>
+                <strong>데이터 차트</strong>
               </p>
               <canvas id="languagePie"></canvas>
             </div>
           </div>
         </div>
-        <div class="text-center">
-          <small><b>Pro Tip</b> Don't forget to star us on github!</small>
-        </div>
+        <!-- 
+          <div class="text-center">
+            <small><b>Pro Tip</b> Don't forget to star us on github!</small>
+          </div>
+         -->
       </div>
     </div>
-    <!-- /.row -->
-
-    <!-- Main row -->
     <div class="row">
       <div class="col-md-3 col-sm-6 col-xs-12">
         <process-info-box color-class="bg-yellow"
@@ -88,7 +73,6 @@
                           :progress="50"
                           description="50% increase since May"></process-info-box>
       </div>
-      <!-- /.col -->
       <div class="col-md-3 col-sm-6 col-xs-12">
         <process-info-box color-class="bg-green"
                           :icon-classes="['ion', 'ion-ios-heart-outline']"
@@ -97,7 +81,6 @@
                           :progress="20"
                           description="20% increase in 30 days"></process-info-box>
       </div>
-      <!-- /.col -->
       <div class="col-md-3 col-sm-6 col-xs-12">
         <process-info-box color-class="bg-red"
                           :icon-classes="['ion', 'ion-ios-cloud-download-outline']"
@@ -106,7 +89,6 @@
                           :progress="70"
                           description="70% increase since yesterday"></process-info-box>
       </div>
-      <!-- /.col -->
       <div class="col-md-3 col-sm-6 col-xs-12">
         <process-info-box color-class="bg-aqua"
                           :icon-classes="['ion', 'ion-ios-chatbubble-outline']"
@@ -115,11 +97,9 @@
                           :progress="40"
                           description="40% increase compared to last year"></process-info-box>
       </div>
-      <!-- /.col -->
     </div>
-    <!-- /.row -->
+
   </section>
-  <!-- /.content -->
 </template>
 
 <script>
@@ -157,22 +137,41 @@ export default {
       return (window.innerWidth <= 800 && window.innerHeight <= 600)
     }
   },
+  methods: {
+    getMain() {
+      const token = localStorage.getItem("ACCESS_TOKEN")
+      if (!token) {
+        alert("인증토큰이 유효하지 않습니다. \n 다시 로그인 해주시기 바랍니다.")
+        return false
+      } else {
+        this.$http.defaults.headers.common['x-access-token'] = token
+        this.$http.get(this.$host + this.$rootpath + "/main")
+        .then(result => {
+          console.log("API 통신 테스트 성공")
+        }).catch(e => {
+          console.log("API 통신 테스트 실패")
+          console.log("서버 통신 코드 : " + e.response.status)
+        })
+      }
+    }
+  },
   mounted () {
+    // this.getMain()
     this.$nextTick(() => {
       var ctx = document.getElementById('trafficBar').getContext('2d')
       var config = {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          labels: ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'],
           datasets: [{
-            label: 'CoPilot',
+            label: '기기',
             fill: false,
             borderColor: '#284184',
             pointBackgroundColor: '#284184',
             backgroundColor: 'rgba(0, 0, 0, 0)',
             data: this.coPilotNumbers
           }, {
-            label: 'Personal Site',
+            label: '회원',
             borderColor: '#4BC0C0',
             pointBackgroundColor: '#4BC0C0',
             backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -201,9 +200,9 @@ export default {
       var pieConfig = {
         type: 'pie',
         data: {
-          labels: ['HTML', 'JavaScript', 'CSS'],
+          labels: ['T(SK)', 'Ohlle(KT)', 'U+(LG)'],
           datasets: [{
-            data: [56.6, 37.7, 4.1],
+            data: [46.6, 30.7, 21.1],
             backgroundColor: ['#00a65a', '#f39c12', '#00c0ef'],
             hoverBackgroundColor: ['#00a65a', '#f39c12', '#00c0ef']
           }]

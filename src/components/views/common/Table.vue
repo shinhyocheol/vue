@@ -1,14 +1,20 @@
 <!-- 공용 컴포넌트 (data-table.vue) 템플릿 -->
 <template>
-  <div class="row center-block custom-table" id="data-table" style="text-align:center;">
+  <div class="row center-block custom-table" 
+       id="data-table" 
+       style="text-align:center;">
     <div class="table-scrollable">
       <table class="table table-bordered table-hover">
         <thead>
           <tr class="heading">
-            <th width="50">
+            <th width="50" v-if="checkbox">
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck" />
-                <label class="custom-control-label" for="customCheck"></label>
+                <input type="checkbox" 
+                       class="custom-control-input" 
+                       id="customCheck" 
+                       v-bind:model="allChecked" />
+                <label class="custom-control-label" 
+                       for="customCheck"></label>
               </div>
             </th>
             <slot name="header" />
@@ -17,14 +23,14 @@
         <tbody>
           <template v-for="(row, index) in item">
             <tr :key="index">
-              <td>
+              <td v-if="checkbox">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" 
                          class="custom-control-input" 
-                         v-bind:id="'customCheck'+row.reg_no" />
-                  
+                         v-bind:id="'customCheck'+row.reg_no"
+                         v-model="row.checked" />
                   <label class="custom-control-label" 
-                         v-bind:for="'customCheck'+row.reg_no" />
+                         v-bind:for="'customCheck'+row.reg_no"></label>
                 </div>
               </td>
               <slot name="list" :row="row"></slot>
@@ -45,7 +51,7 @@
               :page-count="pagingCnt" 
               :page-range="10" 
               :margin-pages="0" 
-              :click-handler="pagingBtnCallback" 
+              :click-handler="pagingHandle" 
               :prev-text="'이전'" 
               :next-text="'다음'" 
               :container-class="'pagination'" 
@@ -60,7 +66,7 @@
 import Paginate from 'vuejs-paginate'
 export default {
   name: "DataTable",
-  props: ['item', 'getTable', 'search'],
+  props: ['item', 'getTable', 'search', 'checkbox'],
   components: {Paginate},
   data () {
     return {
@@ -68,26 +74,39 @@ export default {
       count: 0
     }
   },
-  methods: {
-    pagingBtnCallback (pageNum) {
-      var params = new URLSearchParams()
-      for (var key in this.search) {
-        if (this.search[key]) {
-          params.append(key, this.search[key])
+  computed: {
+    allChecked: {
+      get: function() {
+        for (let i = 0, len = this.item.length; i < len; i++) {
+          if (!this.item[i].checked) return false
+        }
+        return true
+      },
+      set: function(v) {
+        for (let i = 0, len = this.item.length; i < len; i++) {
+          this.item[i].checked = v
         }
       }
-      params.append("pageNum", (pageNum - 1) * 20)
-      this.getTable(params)
-    }
-  },
-  computed: {
+    },
     pagingCnt () {
       if (this.item.length !== 0) {
-        this.count = Math.ceil(this.item[0].cnt / 20)
+        this.count = Math.ceil((this.item[0].cnt * 1) / 15)
       } else {
         this.count = 0
       }
       return this.count
+    }
+  },
+  methods: {
+    pagingHandle (pageNum) {
+      const params = new URLSearchParams()
+      for (const key in this.search) {
+        if (this.search[key]) {
+          params.append(key, this.search[key])
+        }
+      }
+      params.append("pageNum", (pageNum - 1) * 15)
+      this.getTable(params)
     }
   }
 }
@@ -102,7 +121,7 @@ export default {
 }
 .custom-table {
   background: #fff;
-  border: #cdcdcd 1px solid;
+  border: #ececec 1px solid;
   border-radius: 5px;
 }
 
@@ -155,20 +174,18 @@ export default {
   background-color: #b3d7ff;
   border-color: #b3d7ff;
 }
-
-.custom-control-input[disabled] ~ .custom-control-label, .custom-control-input:disabled ~ .custom-control-label {
+.custom-control-input[disabled] ~ .custom-control-label, 
+.custom-control-input:disabled ~ .custom-control-label {
   color: #6c757d;
 }
-
-.custom-control-input[disabled] ~ .custom-control-label::before, .custom-control-input:disabled ~ .custom-control-label::before {
+.custom-control-input[disabled] ~ .custom-control-label::before, 
+.custom-control-input:disabled ~ .custom-control-label::before {
   background-color: #e9ecef;
 }
-
 .custom-control-label {
   vertical-align: middle;
   float: left;
 }
-
 .custom-control-label::before {
   position: absolute;
   display: block;

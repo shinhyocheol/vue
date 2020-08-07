@@ -58,24 +58,37 @@ export default {
           .then(() => {
             this.$router.push(this.$rootpath + "/dashboard")
           }).catch(e => {
-            console.log(e)
             switch (e.response.status) {
+              case 400:
+                alert("요청방식이 올바르지 않습니다. \n관리자에게 문의바랍니다.")
+                console.log(e)
+                console.log("msg : " + e.response.data)
+                break
               case 401:
                 alert("접근 권한이 없습니다.")
-                return false
+                console.log(e)
+                console.log("msg : " + e.response.data)
+                break
               case 403:
-                alert("접근권한이 없거나 비밀번호가 올바르지 않습니다.")
-                return false
+                alert("접근권한이 없거나 패스워드가 올바르지 않습니다.")
+                console.log(e)
+                console.log("msg : " + e.response.data)
+                break
               case 404:
                 alert("존재하지 않는 주소입니다.")
-                return false
+                console.log(e)
+                console.log("msg : " + e.response.data)
+                break
               case 500:
                 alert("서버측에 문제가 발생했습니다. \n관리자에게 문의바랍니다.")
-                console.log("Reuqest Error Info : " + e)
-                return false
+                console.log(e)
+                console.log("msg : " + e.response.data)
+                break
               case 700:
                 alert("사용자의 정보가 확인되지 않습니다. \n정보 확인 후 다시 시도해주시기 바랍니다.")
-                return false
+                console.log(e)
+                console.log("msg : " + e.response.data)
+                break
             }
           })
       } else {
